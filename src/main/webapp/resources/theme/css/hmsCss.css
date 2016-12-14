@@ -1,0 +1,114 @@
+#appointment{
+	display: none;
+}
+#doctorIdHidden{
+	display: none;
+}
+#slotTimeHidden{
+	display: none;
+}
+.header-logo {
+    margin-top: 1%;
+}
+.navbar-default {
+    margin-top: 2%;
+    font-size: 15px;
+    font-family: sans-serif;
+    font-weight: 100;
+    
+}
+
+.daysWidth{
+	width: 100px;	
+}
+.widthName{
+	width: 100px;
+}
+
+body{
+    font-family: sans-serif;
+    color: #003366;
+}
+            
+.header{
+ margin-top: 50px;
+  } 
+ h2{                
+  color: #003366;
+  padding: 10px;
+}   
+.footer{
+ padding-top: 20px;
+ margin-left: 16%;
+ }
+.footimg{
+   padding-left: 74%;
+ }
+label.error{
+	color: #a94442;
+	font-size:11px;
+}
+.glyph_size{
+    font-size: 22px;
+ 
+}
+input.error{
+	color: #a94442;
+	border-color: #a94442;
+}
+input.valid{
+	color: green;
+	border-color: green;
+}
+select.error{
+	color: #a94442;
+	border-color: #a94442;
+}
+select.valid{
+	color: green;
+	border-color: green;
+}
+textarea.error{
+	color:#a94442;
+	border-color: #a94442;
+}
+textarea.valid{
+	color: green;
+	border-color: green;
+}
+.caps{
+	text-transform: capitalize;
+}
+th{
+    background-color: #EDF2F7;
+    color: #006699;
+}
+.borderpanel{
+	border-color: rbg(51, 122, 183);
+    border-style: solid;
+    border-radius: 4px;
+    border-width: 1px;
+    background-color: white;
+    color: #002C84;
+    font-family: "Droid Sans", sans-serif;
+
+}
+.topmargin{
+    margin-top: 25px;
+}
+.marginTop{
+	margin-top: 2px;
+}
+.lineMargin{
+	margin-top: 12px;
+}
+.glyphMargin{
+	margin-top: 40px;
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
