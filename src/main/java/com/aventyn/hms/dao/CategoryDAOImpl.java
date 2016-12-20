@@ -38,26 +38,26 @@ public class CategoryDAOImpl implements CategoryDAO {
 		System.out.println("Updated NAME:: "+category.getCategoryName());
 
 		
-		if(!category.getCategoryId().isEmpty()){
+		if(id==null || id.isEmpty()){
 			
-			mongoTemplate.updateFirst(new Query(Criteria.where("_id").is(id)),new Update(),Category.class);
-			
-			mongoTemplate.save(category, "categories");
-			System.out.println("Document updated in IMPL class");
-			
-		}
-		else{
 			String type=category.getCategoryType();
 			String name=category.getCategoryName();
 			SimpleDateFormat simpleDateFormat =
 		            new SimpleDateFormat("yyyyMMddhhmmss");
 			String dateAsString = simpleDateFormat.format(new Date());
-			if(category.getCategoryType().equalsIgnoreCase("Doctors")){
+			if(type.equalsIgnoreCase("Doctors")){
 				String doctName=category.getCategoryName();
 				category.setCategoryName("Dr."+doctName);
 			}
 			category.setCategoryId((type.substring(0, 3)).concat(name.substring(0, 3)).concat(dateAsString));
 			mongoTemplate.save(category, "categories");
+			
+		}
+		else{
+			mongoTemplate.updateFirst(new Query(Criteria.where("_id").is(id)),new Update(),Category.class);
+			
+			mongoTemplate.save(category, "categories");
+			System.out.println("Document updated in IMPL class");
 
 		}
 		return category.getCategoryId();

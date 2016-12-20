@@ -1,86 +1,49 @@
 package com.aventyn.hms.controller;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.aventyn.hms.dao.BillingMastersDAO;
-import com.aventyn.hms.dao.DepartmentDAO;
-import com.aventyn.hms.domain.BillingMasters;
+import com.aventyn.hms.dao.PatientDAO;
+import com.aventyn.hms.domain.Bill;
 
 @Controller
 @RequestMapping(value="/billing")
 public class BillingController {
 	
 	@Autowired
-	BillingMastersDAO billingMastersDAO;
-	
-	@Autowired
-	DepartmentDAO departmentDAO;
+	PatientDAO patientDAO;
 	
 	@ModelAttribute
-	public BillingMasters loadForm(@RequestParam(required=false)String billingId){
-		BillingMasters billing = null;
+	public Bill loadObject(@RequestParam(value="billingId", required=false)String billingId){
+		Bill bill=null;
 		if(billingId==null || billingId.isEmpty()){
-			billing= new BillingMasters();
-		}else{
-			
+			bill=new Bill();
 		}
 		
-		return billing;
+		return bill;
 	}
 	
-	@RequestMapping(value="/form", method=RequestMethod.GET)
-	public String getForm(ModelMap model){
-		System.out.println("Billing Controller's form()");
-		BillingMasters m=new BillingMasters();
-		Map<String, String> departments= departmentDAO.getDepartments();
+	@RequestMapping(value="/form")
+	public String form(ModelMap model){
+		model.addAttribute("patients", patientDAO.getAllPatients());
 		
-		model.addAttribute("billingMasters",m);
-		model.addAttribute("departments",departments);
+		System.out.println("Billing Page.");
+		
 		return "billingForm";
 	}
 	
-	@RequestMapping(value="/save", method=RequestMethod.POST)
-	public @ResponseBody String saveBillingMasters(@ModelAttribute("billingMasters") BillingMasters billingMasters,
-	        ModelMap map, RedirectAttributes redirect) throws IllegalStateException, IOException {
-		
-    String saveDirectory = "C:/myfiles/";
-    String result=null;
-
-    MultipartFile file = billingMasters.getFile();
-
-	System.out.println("Bill: "+billingMasters.getABCCost() +" "+billingMasters.getBillingAmount()+" "+ billingMasters.getDepartmentId());
-	
-    if (null != file) {
-        	System.out.println("File Name "+file);
-            String fileName = file.getOriginalFilename();
-            if (!"".equalsIgnoreCase(fileName)) {
-            	file.transferTo(new File(saveDirectory + fileName));
-            }
-        }
-    	billingMasters.setFilePath(saveDirectory+file.getOriginalFilename());
-    	String id=billingMastersDAO.save(billingMasters);
-    	if(id!=null){
-    		
-    		System.out.println("Inside IF loop");
-    	result="Billing Details for "+billingMasters.getServiceName() +"has been saved successfully.";
-    	//redirect.addFlashAttribute("successMsg", "Billing Details for "+billingMasters.getServiceName() +"has been saved successfully.");
-    	//redirect.addFlashAttribute("billingMasters", billingMasters);
-    	// map.addAttribute("files", fileNames);
-    	}
-    	return result;
+	@RequestMapping(value="/lastBill")
+	public @ResponseBody String lastBill(ModelMap model){
+		Bill b=new Bill();
+		b.setBillAmount(1000);;
+		b.setBillingId("12345SDf");
+		model.addAttribute("lastBills", "");
+		System.out.println("Last Bills...");
+		return "success";
 	}
-	
 }

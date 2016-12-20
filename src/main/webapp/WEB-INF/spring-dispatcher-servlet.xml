@@ -46,6 +46,8 @@
 	
 	<bean id="billingMastersDAO" class="com.aventyn.hms.dao.BillingMastersDAOImpl"></bean>
 	
+	<bean id="billingDAO" class="com.aventyn.hms.dao.BillingDAOImpl"></bean>
+	
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		 <!-- setting maximum upload size -->

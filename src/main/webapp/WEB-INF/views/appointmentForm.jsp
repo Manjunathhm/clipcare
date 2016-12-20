@@ -218,7 +218,7 @@
           <div class="row">
           <div class="tab-content">
           <div class="col-sm-12 col-md-12 table-responsive begin-top">
-          <f:form class="form-horizontal categoryFields1" id="referral" action="demo"  method="post" modelAttribute="category">
+          <f:form class="form-horizontal categoryFields1" id="referral" modelAttribute="category">
          	<div class="row margin_div">
             <div class="col-sm-3 col-md-2">
             <label class="control-label">Select Category</label>
@@ -232,12 +232,6 @@
            	</div>
                 <div id="referralSaved" style="color: green; font-size:20px"></div>
          	</div>
-                
-         <%-- <div id="dialog" class="row" style="margin-top:2px">
-         
-         	<div class="col-sm-3 col-md-3"></div>
-         	<div class="col-sm-9 col-md-9"><label id="labelmsg">${msgSave}</label></div>
-         </div> --%>
             
             <div class="col-sm-12 col-md-12">
                   <f:hidden path="categoryId"/>
@@ -246,10 +240,10 @@
                         <label class="control-label">Name:</label>
                     </div>
                         <div class="col-md-3 col-sm-4">
-                            <f:input type="text" class="form-control input-sm field_color caps" path="categoryName" placeholder="Name"/>
+                            <f:input type="text" class="form-control input-sm field_color caps" name="categoryName" path="categoryName" placeholder="Name"/>
                         </div>
                         <div class="col-md-3 col-sm-4">                    
-                            <f:input type="text"  class="form-control input-sm field_color caps" path="categoryBranch" placeholder="Branch"/>
+                            <f:input type="text"  class="form-control input-sm field_color caps" name="categoryBranch" path="categoryBranch" placeholder="Branch"/>
                         </div>
                     </div> 
                     
@@ -312,7 +306,7 @@
                      <input type="button" class="btn btn-primary btn-sm  height_margin" data-dismiss="modal" name="CANCEL" value="Cancel">
                      </div>
                      <div class="col-md-1 col-sm-1 ">
-                     <input type="button" class="btn btn-primary btn-sm  height_margin" data-dismiss="modal" name="SAVE" value="Save"  onclick="saveReferral()">
+                     <input type="button" class="btn btn-primary btn-sm  height_margin" data-dismiss="modal" name="SAVE" value="Submit" id="saveReferral">
                      </div>                    
                      
                 </div>
@@ -804,8 +798,7 @@
                                 </div>
                             </div>
                             
-                             <div class="row">
-               
+          <div class="row">
                     
                 <div class="row col-sm-12 col-md-12 margin_div">
                     <div class="col-sm-8 col-md-8 col-xs-6"></div>
@@ -1082,9 +1075,17 @@
                }
         	   
              //***********Passing the New Referral Details to Save to the DB*************//
-        	  /*  $( "#referral" ).on("submit", function(event) {
+             
+       /*  var data = $('form#myForm').serialize();
+        $.post('/test.php', data, function(response) {
+            $('div#inputs').html($(response).find('div#inputs'));
+        });*/
+    }); 
+             
+           $('input#saveReferral').on('click', function(e) {
         		   event.preventDefault();
-        		   var ref=$( this ).serialize();
+        		   var ref=$( 'form#referral' ).serialize();
+        		   console.log("Referral...")
         		   console.log(ref );
         		   
         		   $.ajax({
@@ -1105,7 +1106,7 @@
           	          }
           	       });
         		   
-        		 }); */
+        		 }); 
         	   
         	   
         	   		$('#refreshPatientData').hide();
@@ -1139,7 +1140,7 @@
             	
            } ); 
             
-            //************Select a Patient from the Database and Show the details in the form***************//
+            //************Select a Patient from the Table and Show the details in the form***************//
             var patientTable = $('#patientsList').DataTable();
             $('#patientsList tbody').on( 'click', 'tr', function () {
           	console.log("dataInTable "+patientTable);
@@ -1225,12 +1226,12 @@
                 
           }; 
               
-});
            
            /*********************New Referral**************/
            
-          function saveReferral(){
+     	   function saveReferral(){
         	var ref=$( this ).serialize();
+        	console.log("Checking..");
    		   	console.log(ref );
    		   
    		   $.ajax({
@@ -1251,7 +1252,7 @@
      	          }
      	       });   
         	   
-           }
+           } 
         		   
           /********************* New Patient *******************/		   
           /*  function registerPatient(){

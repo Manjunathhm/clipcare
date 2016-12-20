@@ -15,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class BillingMasters implements Serializable{
 
 	@Id
-	private String billingId;
+	private String billingMastersId;
 	
 	private String departmentId;
 	private String serviceCode;
@@ -49,11 +49,11 @@ public class BillingMasters implements Serializable{
 		this.file = file;
 	}
 
-	public String getBillingId() {
-		return billingId;
+	public String getBillingMastersId() {
+		return billingMastersId;
 	}
-	public void setBillingId(String billingId) {
-		this.billingId = billingId;
+	public void setBillingMastersId(String billingMastersId) {
+		this.billingMastersId = billingMastersId;
 	}
 	public String getDepartmentId() {
 		return departmentId;

@@ -64,6 +64,7 @@ public class AppointmentController {
 		Gson gson = new Gson();
 
 		model.addAttribute("departmentNames",departmentDAO.getDepartments());
+		model.addAttribute("types", categoryDAO.getNames());
 		
 		Collection<Patient> patients=patientDAO.getAllPatients();
 		model.addAttribute("patients",patients );
@@ -144,7 +145,7 @@ public class AppointmentController {
     		String id=categoryDAO.saveCategory(category);
             returnText[0] = "Referral details have been saved sucessfully.";
             returnText[1] = id;
-            returnText[2] = "DemoName";
+            returnText[2] = category.getCategoryName();
         }else{
             returnText[0] = "Sorry, an error has occur. Referral has not been added to list.";
         }

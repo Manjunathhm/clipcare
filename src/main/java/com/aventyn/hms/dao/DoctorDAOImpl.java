@@ -7,11 +7,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.CriteriaDefinition;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 
-import com.aventyn.hms.domain.CategoryTypes;
 import com.aventyn.hms.domain.Counter;
 import com.aventyn.hms.domain.Department;
 import com.aventyn.hms.domain.Doctor;
@@ -63,6 +61,7 @@ public class DoctorDAOImpl implements DoctorDAO{
 		query.fields().include("department");
 		query.fields().include("qualification");
 		query.fields().include("shifts");
+		query.fields().include("slotTime");
 				
 		return mongoTemplate.find(query, Doctor.class, "doctors");
 	}
@@ -72,15 +71,6 @@ public class DoctorDAOImpl implements DoctorDAO{
 		System.out.println("Deleting the Doctor : "+doctorId);
 		mongoTemplate.findAndModify(new Query(Criteria.where("_id").is(doctorId)), new Update().set("active", false), Doctor.class, "doctors");
 		return true;
-	}
-
-	
-	public void getTime(){
-		Query q=new Query();
-		
-		Doctor d=mongoTemplate.findOne(new Query(Criteria.where("fromTime").is("")), Doctor.class, "doctors");
-		
-		
 	}
 
 

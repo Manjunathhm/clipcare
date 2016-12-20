@@ -17,8 +17,10 @@ Admin Dashboard<br>
 <input type="button" onclick="window.location='/LoginMavenSpringMVC/doctor/form'" value="Doctor Registration"><br><br>
 <input type="button" onclick="window.location='/LoginMavenSpringMVC/patient/form'" value="Patient Registration"><br><br>
 <input type="button" onclick="window.location='/LoginMavenSpringMVC/appointment/form'"  value="Book Appointment"/><br><br>
-<input type="button" onclick="window.location='/LoginMavenSpringMVC/billing/form'"  value="Billing Masters"/><br><br>
+<input type="button" onclick="window.location='/LoginMavenSpringMVC/billingMasters/form'"  value="Billing Masters"/><br><br>
 <input type="button" onclick="window.location='/LoginMavenSpringMVC/department/form'"  value="Department Masters"/><br><br>
+<input type="button" onclick="window.location='/LoginMavenSpringMVC/billing/form'"  value="Billing"><br><br>
+
 <!-- <input type="button" onclick="window.location='/LoginMavenSpringMVC/demo/AddUser'"  value="Demo"/><br><br>
 <input type="button" onclick="window.location='/LoginMavenSpringMVC/'"  value="JsonDemo"/><br><br> -->
 

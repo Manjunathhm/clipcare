@@ -16,7 +16,7 @@ public class BillingMastersDAOImpl implements BillingMastersDAO {
 	
 	@Override
 	public String save(BillingMasters billingMasters) {
-		String id=billingMasters.getBillingId();
+		String id=billingMasters.getBillingMastersId();
 		
 		if(id!=null){	
 			System.out.println("Updating the Billing Details....");
@@ -26,13 +26,13 @@ public class BillingMastersDAOImpl implements BillingMastersDAO {
 			mongoTemplate.save(billingMasters, "billingMasters");
 		
 		}else{
-			Counter counter=mongoTemplate.findAndModify(new Query(Criteria.where("_id").is("billingId")), new Update().inc("sequence", 1), Counter.class, "counters");
+			Counter counter=mongoTemplate.findAndModify(new Query(Criteria.where("_id").is("billingMastersId")), new Update().inc("sequence", 1), Counter.class, "counters");
 
 			Integer seq=counter.getSequence();
-			billingMasters.setBillingId("BMSHTBILL"+seq);
+			billingMasters.setBillingMastersId("BMSHTBILL"+seq);
 			mongoTemplate.save(billingMasters, "billingMasters");
 		}
 		 
-		return billingMasters.getBillingId();
+		return billingMasters.getBillingMastersId();
 	}
 }
