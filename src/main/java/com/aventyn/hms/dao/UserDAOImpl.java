@@ -41,6 +41,7 @@ public class UserDAOImpl implements UserDetailsService {
 			
 			User u=null;
 			Object principal= SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			System.out.println("PRINCI: "+principal);
 			if(principal instanceof User){
 				u=(User)principal;
 			System.out.println("Login USER: "+u);

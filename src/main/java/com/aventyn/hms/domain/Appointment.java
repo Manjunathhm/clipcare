@@ -27,6 +27,10 @@ public class Appointment implements Serializable{
 	private long startTime;
 	private long endTime;
 	
+	private String patientArrivalTime;
+	private String doctorArrivalTime;
+	private String patientWaitingTime;
+	
 	public String getReferralId() {
 		return referralId;
 	}
@@ -45,9 +49,6 @@ public class Appointment implements Serializable{
 	public void setEndTime(long endTime) {
 		this.endTime = endTime;
 	}
-	private String patientArrivalTime;
-	private String doctorArrivalTime;
-	private String patientWaitingTime;
 	
 	public String getAppointmentId() {
 		return appointmentId;
@@ -58,8 +59,10 @@ public class Appointment implements Serializable{
 	public Date getDateAndTimeOfAppointment() {
 		return dateAndTimeOfAppointment;
 	}
-	public void setDateAndTimeOfAppointment(Date dateAndTimeOfAppointment) {
-		this.dateAndTimeOfAppointment = dateAndTimeOfAppointment;
+	public void setDateAndTimeOfAppointment() {
+		Date date=new Date();
+		System.out.println("Current Date : "+date);
+		this.dateAndTimeOfAppointment = date;
 	}
 	public long getSlotDuration() {
 		return slotDuration;

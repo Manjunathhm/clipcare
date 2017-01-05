@@ -12,26 +12,52 @@ import org.springframework.data.annotation.Transient;
 import org.springframework.web.multipart.MultipartFile;
 
 @SuppressWarnings("serial")
-public class BillingMasters implements Serializable{
+public class ServiceMaster implements Serializable{
 
 	@Id
-	private String billingMastersId;
+	private String serviceMasterId;
 	
 	private String departmentId;
 	private String serviceCode;
 	private String serviceName;
 	
 	private String serviceAbbreviation;
-	private long costOfTheBill;
+	private long serviceCost;
 	private long ABCCost;
 	private long billingAmount;
 	private Date effectiveFrom;
 	private String remarks;
 	
+	private int quantity;
+	private String discount;
+	private long serviceTotal;
+	
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
+	public String getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(String discount) {
+		this.discount = discount;
+	}
+
+	public long getServiceTotal() {
+		return serviceTotal;
+	}
+
+	public void setServiceTotal(long serviceTotal) {
+		this.serviceTotal = serviceTotal;
+	}
 	@Transient
 	private MultipartFile file;
 	private String filePath;
-	//private MultipartFile file1;
 	 
     public String getFilePath() {
 		return filePath;
@@ -49,11 +75,11 @@ public class BillingMasters implements Serializable{
 		this.file = file;
 	}
 
-	public String getBillingMastersId() {
-		return billingMastersId;
+	public String getServiceMasterId() {
+		return serviceMasterId;
 	}
-	public void setBillingMastersId(String billingMastersId) {
-		this.billingMastersId = billingMastersId;
+	public void setServiceMasterId(String serviceMasterId) {
+		this.serviceMasterId = serviceMasterId;
 	}
 	public String getDepartmentId() {
 		return departmentId;
@@ -84,11 +110,11 @@ public class BillingMasters implements Serializable{
 	public void setServiceAbbreviation(String serviceAbbreviation) {
 		this.serviceAbbreviation = serviceAbbreviation;
 	}
-	public long getCostOfTheBill() {
-		return costOfTheBill;
+	public long getServiceCost() {
+		return serviceCost;
 	}
-	public void setCostOfTheBill(long costOfTheBill) {
-		this.costOfTheBill = costOfTheBill;
+	public void setServiceCost(long serviceCost) {
+		this.serviceCost = serviceCost;
 	}
 	public long getABCCost() {
 		return ABCCost;
@@ -126,13 +152,4 @@ public class BillingMasters implements Serializable{
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
 	}
-
-	/*public MultipartFile getFile1() {
-		return file1;
-	}
-
-	public void setFile1(MultipartFile file1) {
-		this.file1 = file1;
-	}
-	*/
 }

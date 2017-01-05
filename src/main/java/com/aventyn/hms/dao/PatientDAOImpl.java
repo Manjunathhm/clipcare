@@ -1,6 +1,8 @@
 package com.aventyn.hms.dao;
 
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -13,13 +15,13 @@ import com.aventyn.hms.domain.Patient;
 
 public class PatientDAOImpl implements PatientDAO{
 
-	
+	public static String collectionName="patients";
 	@Autowired
 	MongoTemplate mongoTemplate;
 	
 	@Override
 	public Patient findPatientById(String patientId) {
-		return mongoTemplate.findById(patientId, Patient.class, "patients");
+		return mongoTemplate.findById(patientId, Patient.class, collectionName);
 	}
 	
 	@Override
@@ -32,13 +34,13 @@ public class PatientDAOImpl implements PatientDAO{
 			System.out.println("Save method of PatientDAO Impl, Id is : "+patientId);
 			Counter counter=mongoTemplate.findAndModify(new Query(Criteria.where("_id").is("patientId")), new Update().inc("sequence", 1), Counter.class, "counters");
 			patient.setPatientId("BMSHTPT"+counter.getSequence());
-			mongoTemplate.save(patient, "patients");
+			mongoTemplate.save(patient, collectionName);
 		
 		}else{
 			
 			System.out.println("Updating the Patient Info Id is : "+patientId);
 			mongoTemplate.updateFirst(new Query(Criteria.where("_id").is(patientId)), new Update(), Patient.class);
-			mongoTemplate.save(patient, "patients");
+			mongoTemplate.save(patient, collectionName);
 			
 		}
 		return patient.getPatientId();
@@ -57,10 +59,27 @@ public class PatientDAOImpl implements PatientDAO{
 		query.fields().include("gender");
 		query.fields().include("mobileNumber1");
 		query.fields().include("emailId1");
-		query.fields().include("currentAddress.city");
+		query.fields().include("currentAddress");
+				
+		return mongoTemplate.find(query, Patient.class, collectionName);
 		
-		return mongoTemplate.find(query, Patient.class, "patients");
+	}
+
+	@Override
+	public Map<String, String> getPatientNames() {
+		Map<String, String> names=new HashMap<String, String>();
+		Query query=new Query();
+		query.fields().include("patientId");
+		query.fields().include("firstName");
+		query.fields().include("middleName");
+		query.fields().include("lastName");
 		
+		Collection<Patient> patients=mongoTemplate.find(query, Patient.class, collectionName);
+		for (Patient patient : patients) {
+			names.put(patient.getPatientId(), patient.getFirstName()+" "+patient.getMiddleName()+" "+patient.getLastName());
+		}
+		
+		return names;
 	}
 
 	/*@Override

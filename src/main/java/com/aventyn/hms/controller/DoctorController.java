@@ -68,7 +68,7 @@ public class DoctorController {
 			}
 			
 		}
-		return "doctorForm";
+		return "doctorFormh";
 	}
 	
 	@RequestMapping(value="/save", method=RequestMethod.POST)

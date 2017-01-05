@@ -256,7 +256,7 @@
                     <div id="cloanArea"> 
                     <c:if test="${fn:length(category.contactPersons) > 0}" >    
               <div id="cloanObject">
-               <div class="row">
+              <div class="row">
               
                <div class="col-md-2 col-sm-3"> 
                    <label id="labelPerson" class="control-label">Contact Persons:</label></div>
@@ -275,7 +275,7 @@
                          <span class="glyphicon glyphicon-plus glyph_size" id="add" aria-hidden="true"></span>
                     </div>
                     
-                    </div>
+               </div>
                     </div>
                     </c:if>
                     <div id="divId">

@@ -82,6 +82,9 @@ public class AppointmentController {
 	    model.addAttribute("jsonDoctors",jsonData);
 		
 	    Collection<Appointment> appointments=appointmentDAO.getAllAppointments();
+	    for (Appointment appointment : appointments) {
+			System.out.println("DateAndTImeFromDB: "+appointment.getDateAndTimeOfAppointment());
+		}
 	    String jsonAppointments= gson.toJson(appointments);
 	    model.addAttribute("appointments", appointments);
 		model.addAttribute("jsonAppointments", jsonAppointments);

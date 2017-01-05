@@ -19,6 +19,7 @@ import com.mongodb.WriteResult;
 
 public class CategoryDAOImpl implements CategoryDAO {
 
+	public static String collectionName="categories";
 	@Autowired
 	MongoTemplate mongoTemplate;
 	
@@ -27,7 +28,7 @@ public class CategoryDAOImpl implements CategoryDAO {
 	@Override
 	public Category findCategoryByID(String categoryId) {
 		
-		return mongoTemplate.findById(categoryId, Category.class, "categories");
+		return mongoTemplate.findById(categoryId, Category.class, collectionName);
 	}
 		
 	@Override
@@ -56,7 +57,7 @@ public class CategoryDAOImpl implements CategoryDAO {
 		else{
 			mongoTemplate.updateFirst(new Query(Criteria.where("_id").is(id)),new Update(),Category.class);
 			
-			mongoTemplate.save(category, "categories");
+			mongoTemplate.save(category, collectionName);
 			System.out.println("Document updated in IMPL class");
 
 		}
@@ -74,7 +75,7 @@ public class CategoryDAOImpl implements CategoryDAO {
 		query.fields().include("categoryEmailID1");
 		query.fields().include("isActive");
 
-		List<Category> list=mongoTemplate.find(query, Category.class, "categories");
+		List<Category> list=mongoTemplate.find(query, Category.class, collectionName);
 			
 		return list;
 	}
@@ -93,18 +94,30 @@ public class CategoryDAOImpl implements CategoryDAO {
   
 	@Override
 	public void addType(CategoryTypes categoryTypes) {
-
 		mongoTemplate.save(categoryTypes, "categoryTypes");
-		
 	}
 
 	@Override
 	public boolean deleteCategory(Category category){
 		
 		String categoryId=category.getCategoryId();
-		mongoTemplate.findAndModify(new Query(Criteria.where("_id").is(categoryId)), new Update().set("isActive", false), Category.class, "categories");
+		mongoTemplate.findAndModify(new Query(Criteria.where("_id").is(categoryId)), new Update().set("isActive", false), Category.class, collectionName);
 		
 		return true; 
+	}
+
+	@Override
+	public String getReferralName(String referralId) {
+		Query query=new Query();
+		query.fields().include("categoryName");
+		query.addCriteria(Criteria.where("categoryId").is(referralId));
+		Category category=mongoTemplate.findOne(query, Category.class, collectionName);
+		if(category!=null){
+			return category.getCategoryName();
+		}else{
+			return null;
+		}
+		
 	}
 
 	

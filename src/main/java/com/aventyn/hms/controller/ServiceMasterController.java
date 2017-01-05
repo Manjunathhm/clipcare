@@ -15,25 +15,25 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.aventyn.hms.dao.BillingMastersDAO;
+import com.aventyn.hms.dao.ServiceMasterDAO;
 import com.aventyn.hms.dao.DepartmentDAO;
-import com.aventyn.hms.domain.BillingMasters;
+import com.aventyn.hms.domain.ServiceMaster;
 
 @Controller
-@RequestMapping(value="/billingMasters")
-public class BillingMastersController {
+@RequestMapping(value="/serviceMaster")
+public class ServiceMasterController {
 	
 	@Autowired
-	BillingMastersDAO billingMastersDAO;
+	ServiceMasterDAO serviceMasterDAO;
 	
 	@Autowired
 	DepartmentDAO departmentDAO;
 	
 	@ModelAttribute
-	public BillingMasters loadForm(@RequestParam(required=false)String billingMastersId){
-		BillingMasters billing = null;
+	public ServiceMaster loadForm(@RequestParam(required=false)String billingMastersId){
+		ServiceMaster billing = null;
 		if(billingMastersId==null || billingMastersId.isEmpty()){
-			billing= new BillingMasters();
+			billing= new ServiceMaster();
 		}else{
 			
 		}
@@ -44,24 +44,24 @@ public class BillingMastersController {
 	@RequestMapping(value="/form", method=RequestMethod.GET)
 	public String getForm(ModelMap model){
 		System.out.println("Billing Controller's form()");
-		BillingMasters m=new BillingMasters();
+		ServiceMaster m=new ServiceMaster();
 		Map<String, String> departments= departmentDAO.getDepartments();
 		
 		model.addAttribute("billingMasters",m);
 		model.addAttribute("departments",departments);
-		return "billingMastersForm";
+		return "serviceMasterForm";
 	}
 	
 	@RequestMapping(value="/save", method=RequestMethod.POST)
-	public @ResponseBody String saveBillingMasters(@ModelAttribute("billingMasters") BillingMasters billingMasters,
+	public @ResponseBody String saveBillingMasters(@ModelAttribute("serviceMaster") ServiceMaster serviceMaster,
 	        ModelMap map, RedirectAttributes redirect) throws IllegalStateException, IOException {
 		
     String saveDirectory = "C:/myfiles/";
     String result=null;
 
-    MultipartFile file = billingMasters.getFile();
+    MultipartFile file = serviceMaster.getFile();
 
-	System.out.println("Bill: "+billingMasters.getABCCost() +" "+billingMasters.getBillingAmount()+" "+ billingMasters.getDepartmentId());
+	System.out.println("Bill: "+serviceMaster.getABCCost() +" "+serviceMaster.getBillingAmount()+" "+ serviceMaster.getDepartmentId());
 	
     if (null != file) {
         	System.out.println("File Name "+file);
@@ -70,15 +70,12 @@ public class BillingMastersController {
             	file.transferTo(new File(saveDirectory + fileName));
             }
         }
-    	billingMasters.setFilePath(saveDirectory+file.getOriginalFilename());
-    	String id=billingMastersDAO.save(billingMasters);
+    	serviceMaster.setFilePath(saveDirectory+file.getOriginalFilename());
+    	String id=serviceMasterDAO.save(serviceMaster);
     	if(id!=null){
     		
-    		System.out.println("Inside IF loop");
-    	result="Billing Details for "+billingMasters.getServiceName() +"has been saved successfully.";
-    	//redirect.addFlashAttribute("successMsg", "Billing Details for "+billingMasters.getServiceName() +"has been saved successfully.");
-    	//redirect.addFlashAttribute("billingMasters", billingMasters);
-    	// map.addAttribute("files", fileNames);
+    	System.out.println("Inside IF loop");
+    	result="Billing Details for "+serviceMaster.getServiceName() +"has been saved successfully.";
     	}
     	return result;
 	}

@@ -56,6 +56,7 @@ public class Doctor implements Serializable {
 	private String dateOfExpiry=null;
 	private Clone clone=new Clone();
 	private long slotTime;
+	private List<Shift> shifts=new ArrayList<Shift>();
 	
 	public Clone getClone() {
 		return clone;
@@ -293,9 +294,6 @@ public class Doctor implements Serializable {
 	public void setDateOfExpiry(String dateOfExpiry) {
 		this.dateOfExpiry = dateOfExpiry;
 	}
-	
-	private List<Shift> shifts=new ArrayList<Shift>();
-
 	public List<Shift> getShifts() {
 		return shifts;
 	}
@@ -306,11 +304,8 @@ public class Doctor implements Serializable {
 	public Doctor(){
 		System.out.println("Zero parameterised Constructor");
 		Shift s1=new Shift();
-		//Shift s2=new Shift();
-		//Shift s3=new Shift();
 		this.shifts.add(s1);
-		//this.shifts.add(s2);
-		//this.shifts.add(s3);
+		
 	}
 	
 }

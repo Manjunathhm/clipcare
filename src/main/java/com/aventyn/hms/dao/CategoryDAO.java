@@ -21,4 +21,8 @@ public interface CategoryDAO {
 	public void addType(CategoryTypes categoryTypes);
 
 	boolean deleteCategory(Category category);
+	
+	public String getReferralName(String referralId);
+	
+	
 }

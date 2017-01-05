@@ -12,4 +12,9 @@ public interface BillingDAO {
 	
 	public List<Bill> getAllBills();
 	
+	public List<Bill> lastFiveBills(String patientId);
+	
+	public List<Bill> getMyDueBills(String patientId);
+	
+	public Bill getMyBill(String patientId, String appointmentId);
 }

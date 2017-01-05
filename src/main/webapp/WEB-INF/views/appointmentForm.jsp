@@ -1040,9 +1040,7 @@
                    endDate: new Date()
                   });
         	   $('[name="dateOfBirth"]').change(function() {   
-               	
                    $('[name="age"]').val(getAge(new Date($('[name="dateOfBirth"]').val())));
-                   
                 });
               $('[name="age"]').change(function(){
             	  var todaysDate= new Date();//get todays date    	 
@@ -1074,18 +1072,12 @@
                  return age;
                }
         	   
-             //***********Passing the New Referral Details to Save to the DB*************//
-             
-       /*  var data = $('form#myForm').serialize();
-        $.post('/test.php', data, function(response) {
-            $('div#inputs').html($(response).find('div#inputs'));
-        });*/
     }); 
              
+           //***********Passing the New Referral Details to Save to the DB*************//
            $('input#saveReferral').on('click', function(e) {
         		   event.preventDefault();
         		   var ref=$( 'form#referral' ).serialize();
-        		   console.log("Referral...")
         		   console.log(ref );
         		   
         		   $.ajax({
@@ -1445,7 +1437,7 @@
                   	}
                   });
               	$.each(docdetails,function(doct, docValue){        		
-              		if(appValue.docID==docValue.doctorsId){
+              		if(appValue.docID==docValue.doctorId){
               			appointmentDetails[app].doctorInfo=docValue;
               		}
               	});
@@ -1519,12 +1511,14 @@
             viewEndDate = moment().endOf('isoWeek');
             curDate = moment();
             $appTable = $("<table/>").prop('id','docAppTab').append('<thead class="head"><tr/></thead>')
-                $appTable.append('<tbody>').addClass('table  table-bordered borderpanel'); 
+            $appTable.append('<tbody>').addClass('table  table-bordered borderpanel'); 
             $appTable.appendTo($('#DoctorApplist').parent()); 
             
             
             $.each(docdetails, function(i,doc){
-                appCal[doc.doctorId]={'docInfo':doc}; 
+            	console.log(doc);
+            	console.log(i.doctorId);
+               	appCal[doc.doctorId]={"docInfo":doc}; 
                 console.log(docdetails);
                 $.each(doc.shifts, function(j,shift){
                     $.each(shift.workingDays, function(k,wday){

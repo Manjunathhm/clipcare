@@ -2,6 +2,7 @@ package com.aventyn.hms.dao;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import com.aventyn.hms.domain.Doctor;
 
@@ -18,6 +19,8 @@ public interface DoctorDAO {
 	public List<String> getDepartmentNames();
 	
 	public void saveShifts(String doctorId);
+	
+	public Map<String, String> getDoctorNames();
 
 		
 }

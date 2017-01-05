@@ -22,7 +22,6 @@
 </head>
 
 <body>
-
   
     <f:form class="form-horizontal" id="registrationform" modelAttribute="doctor" method="post" action="save">
 
@@ -465,7 +464,7 @@
 	                   
 	                   <td>
 	                    <label>Select Days</label>
-                    <f:select class="form-control input-sm selectPicker" path="shifts[0].workingDays" multiple="true">
+                    	<f:select class="form-control input-sm selectPicker" path="shifts[0].workingDays" multiple="true">
                         <f:option value="Mon">Mon</f:option>
                         <f:option value="Tue">Tue</f:option>
                         <f:option value="Wed">Wed</f:option>
@@ -503,12 +502,11 @@
                          <span class="glyphicon glyphicon-plus glyph_size" id="add" aria-hidden="true"></span>
                     </div></td>
                                           
-                                            </tr>
-                                            </c:if>
-                                            <tr  class="clone hide" id="cloneObject">
-                                            
-                                            <td>
-                                             <label>Select Days</label>
+                 </tr>
+               </c:if>
+          <tr  class="clone hide" id="cloneObject">
+               <td>
+                    <label>Select Days</label>
                     <f:select class="form-control input-sm selectPicker" disabled="disabled" path="clone.select" multiple="true">
                         <f:option value="Mon">Mon</f:option>
                         <f:option value="Tue">Tue</f:option>
@@ -518,23 +516,23 @@
                         <f:option value="Sat">Sat</f:option>
                         <f:option value="Sun">Sun</f:option>
                     </f:select></td>
-                    <td>
-                    <div class="col-md-6">
+               <td>
+               <div class="col-md-6">
                     <label>From Time</label>
                     
-                <div class="input-group bootstrap-timepicker timepicker " >
+               <div class="input-group bootstrap-timepicker timepicker " >
                         <f:input  type="text" class="form-control input-sm " disabled="disabled" path="clone.from"/>
                     <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
-                </div>
-                </div>
-                <div class=col-md-6>
-                <label>To Time</label>
+               </div>
+               </div>
+               <div class=col-md-6>
+               <label>To Time</label>
                    <div class="input-group bootstrap-timepicker timepicker ">
                         <f:input  type="text" class="form-control input-sm " disabled="disabled" path="clone.to"/>
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
-                </div>
-                </div>
-                    </td>
+                    	<span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                	</div>
+               </div>
+               </td>
                     <td class="text-center">
                     <div class="form-group-sm">
                     	<label></label>
@@ -645,7 +643,6 @@
             </div>
                 </div>
             </div>
-        
 
         </div>
     </f:form>
@@ -658,7 +655,6 @@
     <script type="text/javascript" src='<spring:url value="/resources/js/bootstrap-datepicker.js"/>'></script>
     <script type="text/javascript" src='<spring:url value="/resources/js/bootstrap-select.min.js"/>'></script>
     <script type="text/javascript" src='<spring:url value="/resources/js/bootstrap-timepicker.min.js"/>'></script>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCC-7IBPlf3APqYJBud27uhWoHv_DJAP4&libraries=places"></script>
   
 
     <script>
@@ -890,7 +886,8 @@ $(document).ready(function(){
 		$("#add").click(function() {
 			
     		var Index =( $("#shiftsTable").find('input').length/5);
-    		nextIndex=Index-1;    		
+    		nextIndex=Index-1;  
+    		console.log(Index);
     		console.log(nextIndex);    	
     		if(nextIndex < 8){
     			var clone= $("#cloneObject").clone();

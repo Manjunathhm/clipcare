@@ -12,5 +12,9 @@ public interface AppointmentDAO {
 	
 	public String saveAppointment(Appointment appointment);
 	
+	public Appointment getLastAppointment(String patientId);
+	
+	public Collection<Appointment> getTodaysAppointments();
+	
 	
 }

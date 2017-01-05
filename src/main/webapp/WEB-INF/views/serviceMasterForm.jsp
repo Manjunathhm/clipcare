@@ -40,7 +40,7 @@
             <h3 class="panel-title">Add Billing Services</h3>
         </div>
         <div class="panel-body" >
-        <f:form class="form-horizontal" id="billingMasterForm" modelAttribute="billingMasters" enctype="multipart/form-data" >
+        <f:form class="form-horizontal" id="serviceMasterForm" modelAttribute="serviceMaster" enctype="multipart/form-data" >
        
        	<div id="masterSaved" style="color: green; font-size:20px"></div>
         <div class="form-group">
@@ -71,7 +71,7 @@
          
          	<div class="col-sm-4 col-md-4">
            		<label >Amount</label>
-           		<f:input type="number" class="form-control" path="costOfTheBill" placeholder="Enter Service Amount"/>
+           		<f:input type="number" class="form-control" path="serviceCost" placeholder="Enter Service Cost"/>
           	</div>
           	
           	<div class="col-sm-4 col-md-4">
@@ -97,7 +97,7 @@
          </div>
          <div class="form-group text-center">
          <div class="col-sm-12">
-          <input type="submit" value="Save" />
+         <input type="submit" value="Save" />
          </div>
         
         </div>
@@ -108,12 +108,12 @@
 <script type="text/javascript" src='<spring:url value="/resources/js/jquery.min.js"/>'></script>
 <script type="text/javascript">
 
-$("#billingMasterForm").submit(function(){
+$("#serviceMasterForm").submit(function(){
 
     var formData = new FormData($(this)[0]);
 
     $.ajax({
-        url: "/LoginMavenSpringMVC/billingMasters/save",
+        url: "/LoginMavenSpringMVC/serviceMaster/save",
         type: 'POST',
         data: formData,
         async: false,
@@ -123,7 +123,7 @@ $("#billingMasterForm").submit(function(){
 	        	$('#serviceCode').val('');
 	        	$('#serviceName').val('');
 	        	$('#serviceAbbreviation').val('');
-	        	$('#costOfTheBill').val('');
+	        	$('#serviceCost').val('');
 	        	$('#ABCCost').val('');
 	        	$('#billingAmount').val('');
 	        	$('#effectiveFrom').val('');

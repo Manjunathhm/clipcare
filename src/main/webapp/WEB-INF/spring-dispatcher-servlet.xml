@@ -44,7 +44,7 @@
 	
 	<bean id="appointmentDAO" class="com.aventyn.hms.dao.AppointmentDAOImpl"></bean>
 	
-	<bean id="billingMastersDAO" class="com.aventyn.hms.dao.BillingMastersDAOImpl"></bean>
+	<bean id="serviceMasterDAO" class="com.aventyn.hms.dao.ServiceMasterDAOImpl"></bean>
 	
 	<bean id="billingDAO" class="com.aventyn.hms.dao.BillingDAOImpl"></bean>
 	
